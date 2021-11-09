@@ -1,0 +1,17 @@
+// Colors
+$bg-color: #3679ab;
+$dot-color: #0a0a0a;
+
+// Dimensions
+$dot-size: 1px;
+$dot-space: 22px;
+
+.bg-div {
+  height: 100%;
+  padding: 100px;
+  background:
+    linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+    linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+    $dot-color;
+  background-size: $dot-space $dot-space;
+}

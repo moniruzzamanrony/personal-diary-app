@@ -5,8 +5,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { HomeComponent } from './home/home.component';
 import {NewDiaryComponent} from "./diary/new-diary/new-diary.component";
 import {DiariesListComponent} from "./diary/diaries-list/diaries-list.component";
-import {NewCetagoryComponent} from "./cetagory/new-cetagory/new-cetagory.component";
-import {CetagoriesListComponent} from "./cetagory/cetagories-list/cetagories-list.component";
+import { CategoriesComponent } from './categories/categories.component';
 
 
 @NgModule({
@@ -14,8 +13,7 @@ import {CetagoriesListComponent} from "./cetagory/cetagories-list/cetagories-lis
     HomeComponent,
     NewDiaryComponent,
     DiariesListComponent,
-    NewCetagoryComponent,
-    CetagoriesListComponent
+    CategoriesComponent
   ],
   imports: [
     CommonModule,
