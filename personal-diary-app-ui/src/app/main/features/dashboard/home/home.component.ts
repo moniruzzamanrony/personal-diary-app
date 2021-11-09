@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   }
 
   gotoAddNewNoteForm(): void {
+
     this._router.navigate(['home/add-new-diary']);
   }
 
