@@ -1,1 +1,31 @@
-<p>login works!</p>
+<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+
+<div class="bg-div">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card border-0 shadow rounded-3 my-5">
+          <div class="card-body p-4 p-sm-5">
+            <h5 class="card-title text-center mb-5 fw-light fs-5">My Personal Dairy</h5>
+            <hr/>
+            <form>
+              <div class="form-floating mb-3">
+                <label class="mb-0">Email</label>
+                <input type="email" class="form-control" placeholder="name@example.com">
+              </div>
+              <div class="form-floating mb-3">
+                <label class="mb-0">Password</label>
+                <input type="password" class="form-control" placeholder="Password">
+              </div>
+              <div class="d-grid text-right">
+                <button class="btn btn-primary fw-bold" (click)="login()">Sign in</button>
+              </div>
+              <hr class="my-4">
+              Are you new user? <a [routerLink]="['sign-up']">sign up</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
