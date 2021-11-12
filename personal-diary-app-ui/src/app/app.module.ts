@@ -7,6 +7,7 @@ import {FeaturesModule} from "./main/features/features.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ToastComponentComponent } from './main/share/components/toast-component/toast-component.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,7 @@ import { ToastComponentComponent } from './main/share/components/toast-component
     BrowserModule,
     FeaturesModule,
     AppRoutingModule,
-    BrowserAnimationsModule,HttpClientModule
+    BrowserAnimationsModule, HttpClientModule, NgbModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]

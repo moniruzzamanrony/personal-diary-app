@@ -1,20 +1,35 @@
-// toast.service.ts
-import { Injectable, TemplateRef  } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {RootToastService} from "./root-toast.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToastService {
 
-  toasts: any[] = [];
+  constructor(public _rootToastService: RootToastService) {}
 
-  // Push new Toasts to array with content and options
-  show(textOrTpl: string | TemplateRef<any>, options: any = {}) {
-    this.toasts.push({ textOrTpl, ...options });
+
+  success(message: string) {
+    this._rootToastService.show(message, {
+      classname: 'bg-success text-light',
+      delay: 2000,
+      autohide: true
+    });
   }
 
-  // Callback method to remove Toast DOM element from view
-  remove(toast: any) {
-    this.toasts = this.toasts.filter(t => t !== toast);
+  error(message: string) {
+    this._rootToastService.show(message, {
+      classname: 'bg-danger text-light',
+      delay: 2000,
+      autohide: true
+    });
+  }
+
+  info(message: string) {
+    this._rootToastService.show(message, {
+      classname: 'bg-info text-light',
+      delay: 3000,
+      autohide: true
+    });
   }
 }

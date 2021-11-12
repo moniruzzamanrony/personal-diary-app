@@ -1,16 +1,20 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
-import {ToastService} from "../../services/toast.service";
+import {RootToastService} from "../../services/root-toast.service";
 
 @Component({
   selector: 'app-toast-component',
   templateUrl: './toast-component.component.html',
-  styleUrls: ['./toast-component.component.scss']
+  styleUrls: ['./toast-component.component.scss'],
+  host: {'[class.ngb-toasts]': 'true'}
 })
 export class ToastComponentComponent implements OnInit {
 
-  constructor(public toastService: ToastService) {}
+  constructor(public toastService: RootToastService) {}
 
-  isTemplate(toast) { return toast.textOrTpl instanceof TemplateRef; }
-}
+  isTemplate(toast: any) { return toast.textOrTpl instanceof TemplateRef; }
+
+  ngOnInit(): void {
+  }
+
 
 }
