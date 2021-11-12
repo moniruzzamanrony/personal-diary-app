@@ -5,18 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {FeaturesModule} from "./main/features/features.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { ToastComponentComponent } from './main/share/components/toast-component/toast-component.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ToastComponentComponent
   ],
   imports: [
     BrowserModule,
     FeaturesModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
