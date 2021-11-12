@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import {NewDiaryComponent} from "./diary/new-diary/new-diary.component";
 import {DiariesListComponent} from "./diary/diaries-list/diaries-list.component";
 import { CategoriesComponent } from './categories/categories.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -15,9 +16,10 @@ import { CategoriesComponent } from './categories/categories.component';
     DiariesListComponent,
     CategoriesComponent
   ],
-  imports: [
-    CommonModule,
-    DashboardRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        DashboardRoutingModule,
+        ReactiveFormsModule
+    ]
 })
 export class DashboardModule { }

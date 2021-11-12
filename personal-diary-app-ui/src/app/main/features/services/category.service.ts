@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/internal/Observable';
 import {environment} from "../../../../environments/environment";
-import {of} from "rxjs";
+import {EMPTY, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +22,13 @@ export class CategoryService {
       description: 'string'
     }]
     return of(json);
+  }
+
+  deleteCategoryById() : Observable<any>{
+    return of(EMPTY);
+  }
+
+  saveCategory(value: any): Observable<any> {
+    return of(EMPTY);
   }
 }
