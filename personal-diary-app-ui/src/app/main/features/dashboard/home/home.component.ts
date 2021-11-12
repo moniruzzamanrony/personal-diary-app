@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {RootToastService} from "../../../share/services/root-toast.service";
-import {ToastService} from "../../../share/services/toast.service";
 
 @Component({
   selector: 'app-home',
@@ -10,8 +8,8 @@ import {ToastService} from "../../../share/services/toast.service";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private _router: Router,
-              public _toastService: ToastService) { }
+  constructor(private _router: Router) {
+  }
 
   ngOnInit(): void {
 
@@ -24,10 +22,6 @@ export class HomeComponent implements OnInit {
 
   gotoAddNewMoreCategories(): void {
     this._router.navigate(['home/categories']);
-    this.showStandard();
   }
 
-  showStandard() {
-    this._toastService.success('I am a standard toast');
-  }
 }

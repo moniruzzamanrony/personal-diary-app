@@ -9,10 +9,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">12/12/12</th>
-      <td>Mark</td>
-      <td>Mark</td>
+    <tr *ngFor="let diaryModel of diaryModelModelList">
+      <th scope="row">{{diaryModel.dateTime}}</th>
+      <td>{{diaryModel.title}}</td>
+      <td>{{diaryModel.dailyNote}}</td>
       <td class="ml-3">
         <button class="btn btn-primary m-1"><i class="fa fa-pencil-square"></i></button>
         <button class="btn btn-danger m-1"><i class="fa fa-trash"></i></button>

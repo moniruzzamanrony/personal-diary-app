@@ -1,14 +1,13 @@
-<form>
-  <div class="form-group">
-    <label for="categoriesName" class="text-left">Title:</label>
-    <input type="text" class="form-control" id="categoriesName">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+<form [formGroup]="dailyNoteFormGroup">
+  <div class="form-group" >
+    <label for="title" class="text-left">Title:</label>
+    <input type="text" class="form-control" formControlName="title" id="title">
   </div>
   <div class="form-group">
-    <label for="description">Daily note:</label>
-    <textarea type="text" class="form-control" id="description"></textarea>
+    <label for="diaryNote">Daily note:</label>
+    <textarea type="text" class="form-control" formControlName="diaryNote" id="diaryNote"></textarea>
   </div>
-  <button type="submit" class="btn btn-primary mr-1">Save</button>
+  <button type="submit" class="btn btn-primary mr-1" (click)="save()">Save</button>
   <button type="button" class="btn btn-info" [routerLink]="['/home/diaries']">Back</button>
 </form>
 
