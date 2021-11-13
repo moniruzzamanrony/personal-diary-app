@@ -12,4 +12,8 @@ spring:
     show-sql: true
 server:
   port: 9022
+itvillage:
+  app:
+    jwtSecret: itvillage29
+    jwtExpiration: 86400
 
