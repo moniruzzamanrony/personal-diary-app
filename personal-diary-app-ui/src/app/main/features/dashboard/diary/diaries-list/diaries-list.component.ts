@@ -33,7 +33,7 @@ export class DiariesListComponent implements OnInit {
           id: diary.id,
           category: diary.category,
           title: diary.title,
-          dailyNote: diary.dailyNote,
+          dailyNote: diary.diaryNote,
           dateTime: diary.dateTime
         })
         }

@@ -18,7 +18,7 @@ public class Daily extends BaseEntity{
     @Id
     private String id;
     private String title;
-    private String dailyNote;
+    private String diaryNote;
     private LocalDateTime dateTime;
     @OneToOne(fetch = FetchType.EAGER)
     private Category category;

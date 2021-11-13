@@ -10,7 +10,7 @@ public class DairyRequest {
 
     private String title;
 
-    private String dailyNote;
+    private String diaryNote;
 
     private String categoryId;
 
