@@ -86,7 +86,12 @@ created with necessary data.
 * [Frontend url](http://localhost:4200/)
 * [Backend Rest API (swagger-ui)](http://localhost:9022/swagger-ui.html)
 
-Demo UI:
-Login Screen:
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+## Demo UI:
+* SignUP Screen:
+![alt text](https://github.com/moniruzzamanrony/personal-diary-app/blob/master/screens/1.png)
 
+* Login Screen:
+![alt text](https://github.com/moniruzzamanrony/personal-diary-app/blob/master/screens/2.png)
+
+* Home Screen:
+![alt text](https://github.com/moniruzzamanrony/personal-diary-app/blob/master/screens/3.png)
