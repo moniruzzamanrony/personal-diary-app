@@ -91,7 +91,7 @@ created with necessary data.
 ![alt text](https://github.com/moniruzzamanrony/personal-diary-app/blob/master/screens/1.png)
 
 * Home Screen:
-![alt text](https://github.com/moniruzzamanrony/personal-diary-app/blob/master/screens/2.png)
+![alt text](https://github.com/moniruzzamanrony/personal-diary-app/blob/master/screens/Screenshot%20from%202021-11-14%2005-20-55.png)
 
 * Login Screen:
 ![alt text](https://github.com/moniruzzamanrony/personal-diary-app/blob/master/screens/3.png)
