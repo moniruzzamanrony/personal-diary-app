@@ -90,8 +90,8 @@ created with necessary data.
 * SignUP Screen:
 ![alt text](https://github.com/moniruzzamanrony/personal-diary-app/blob/master/screens/1.png)
 
-* Login Screen:
+* Home Screen:
 ![alt text](https://github.com/moniruzzamanrony/personal-diary-app/blob/master/screens/2.png)
 
-* Home Screen:
+* Login Screen:
 ![alt text](https://github.com/moniruzzamanrony/personal-diary-app/blob/master/screens/3.png)
