@@ -12,6 +12,7 @@ import com.impelitsolutions.personaldiaryapp.auth.web.dto.request.ResetPasswordF
 import com.impelitsolutions.personaldiaryapp.auth.web.dto.request.SignUpForm;
 import com.impelitsolutions.personaldiaryapp.auth.web.dto.response.JwtResponse;
 import com.impelitsolutions.personaldiaryapp.auth.web.dto.response.LoggedUserDetailsResponse;
+import com.impelitsolutions.personaldiaryapp.common.exceptions.RoleNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,69 +44,43 @@ public class SignUpAndSignInService {
 
     public ResponseEntity<String> signUp(SignUpForm signUpRequest) {
 
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (userRepository.existsByUsername(signUpRequest.getEmail())) {
             return new ResponseEntity<String>("Fail -> Username is already taken!",
                     HttpStatus.BAD_REQUEST);
         }
 
 
-        // Creating user's account
         User user = new User();
-
-        Set<RoleName> strRoles = signUpRequest.getRole();
+        Set<RoleName> strRoles = new HashSet<>();
+        strRoles.add(RoleName.ROLE_DIARY_USER);
         Set<Role> roles = new HashSet<>();
         strRoles.forEach(role -> {
             switch (role) {
-                case ROLE_ADMIN:
-                    Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
+                case ROLE_DIARY_USER:
+                    Role adminRole = roleRepository.findByName(RoleName.ROLE_DIARY_USER)
                             .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
                     roles.add(adminRole);
 
                     break;
-                case ROLE_PM:
-                    Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(pmRole);
-
-                    break;
-                case ADMIN:
-                    Role admin = roleRepository.findByName(RoleName.ADMIN)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(admin);
-
-                    break;
-                case LEARNER:
-                    Role learner = roleRepository.findByName(RoleName.LEARNER)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(learner);
-
-                    break;
-                case INSTRUCTOR:
-                    Role instructor = roleRepository.findByName(RoleName.INSTRUCTOR)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(instructor);
-
-                    break;
                 default:
-                    Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-                            .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-                    roles.add(userRole);
+                   throw new RoleNotFoundException("Role not found");
             }
         });
 
-        user.setId(signUpRequest.getUserId());
-        user.setUsername(signUpRequest.getUsername());
+        user.setId(UUID.randomUUID().toString());
+        user.setName(signUpRequest.getName());
+        user.setUsername(signUpRequest.getEmail());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
-        user.setApplicationName(signUpRequest.getApplicationName());
+
         user.setRoles(roles);
         userRepository.save(user);
 
-        return new ResponseEntity<String>(signUpRequest.getUserId(), HttpStatus.OK);
+        return new ResponseEntity<String>(signUpRequest.getEmail(), HttpStatus.OK);
     }
 
     public JwtResponse signIn(LoginForm loginRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
+                        loginRequest.getEmail(),
                         loginRequest.getPassword()
                 )
         );

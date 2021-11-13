@@ -22,11 +22,11 @@ public class User {
     @Id
     private String id;
 
+    private String name;
+
     private String username;
 
     private String password;
-
-    private String applicationName;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
