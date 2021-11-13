@@ -3,6 +3,7 @@
     <thead>
     <tr>
       <th scope="col">Date</th>
+      <th scope="col">Category</th>
       <th scope="col">Title</th>
       <th scope="col">Note</th>
       <th scope="col">Action</th>
@@ -11,11 +12,12 @@
     <tbody>
     <tr *ngFor="let diaryModel of diaryModelModelList">
       <th scope="row">{{diaryModel.dateTime}}</th>
+      <td>{{diaryModel.category.categoryName}}</td>
       <td>{{diaryModel.title}}</td>
       <td>{{diaryModel.dailyNote}}</td>
       <td class="ml-3">
-        <button class="btn btn-primary m-1"><i class="fa fa-pencil-square"></i></button>
-        <button class="btn btn-danger m-1"><i class="fa fa-trash"></i></button>
+        <button class="btn btn-primary m-1" (click)="edit(diaryModel.id)"><i class="fa fa-pencil-square"></i></button>
+        <button class="btn btn-danger m-1" (click)="delete(diaryModel.id)"><i class="fa fa-trash"></i></button>
       </td>
     </tr>
     </tbody>

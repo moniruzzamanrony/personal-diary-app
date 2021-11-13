@@ -7,6 +7,16 @@
     <label for="diaryNote">Daily note:</label>
     <textarea type="text" class="form-control" formControlName="diaryNote" id="diaryNote"></textarea>
   </div>
+
+  <div class="form-group">
+    <label for="diaryNote">Note category:</label>
+    <div class="form-group">
+      <select class="form-control" formControlName="categoryId">
+        <option *ngFor="let categoryModel of categoryModelList" [value]="categoryModel.id">{{categoryModel.categoryName}}</option>
+      </select>
+    </div>
+  </div>
+
   <button type="submit" class="btn btn-primary mr-1" (click)="save()">Save</button>
   <button type="button" class="btn btn-info" [routerLink]="['/home/diaries']">Back</button>
 </form>

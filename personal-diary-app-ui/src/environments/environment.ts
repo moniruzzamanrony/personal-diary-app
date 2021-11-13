@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  personalDiaryBackendHost: 'https://www.facebook.com/'
+  personalDiaryBackendHost: 'http://localhost:9022/'
 };
 
 /*

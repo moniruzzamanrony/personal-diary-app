@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     } else {
 
       this._usersService.login(this.formGroup?.value).subscribe(result => {
+        localStorage.setItem("token", result.token)
         this._router.navigate(['/home']);
       }, error => {
         this._toastService.error('Invalid email or password.')

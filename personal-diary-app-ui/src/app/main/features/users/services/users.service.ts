@@ -18,10 +18,10 @@ export class UsersService {
 
 
   login(body: any) : Observable<any>{
-    return of(EMPTY);
+    return this.http.post(this.personalDiaryBackendHost+'public/signin', body);
   }
 
   signUp(value: any): Observable<any> {
-    return of(EMPTY);
+    return this.http.post(this.personalDiaryBackendHost+'public/signup', value);
   }
 }

@@ -28,8 +28,9 @@ export class CategoriesComponent implements OnInit {
   }
 
   getCategoriesList(): void {
+    this.categoryModelList = [];
     this._categoryService.getCategoriesList().subscribe(result => {
-      result.forEach((category: any) => {
+      result.body.forEach((category: any) => {
         this.categoryModelList.push({
           id: category.id,
           categoryName: category.categoryName,
@@ -40,8 +41,11 @@ export class CategoriesComponent implements OnInit {
   }
 
   deleteCategoryById(id: any): void {
-    this._categoryService.deleteCategoryById().subscribe(result => {
+    this._categoryService.deleteCategoryById(id).subscribe(result => {
       this._toastService.success('Delete successfully.')
+      this.getCategoriesList();
+    }, error => {
+      this._toastService.error('FK found,can not delete this.');
     })
   }
 
@@ -50,7 +54,10 @@ export class CategoriesComponent implements OnInit {
       this._toastService.info('Categories name required.')
     } else {
       this._categoryService.saveCategory(this.formGroup?.value).subscribe(result => {
-        this._toastService.success('Save successfully.')
+        this._toastService.success('Save successfully.');
+        this.getCategoriesList();
+      }, error => {
+        this._toastService.error('Something want wrong.');
       })
     }
   }

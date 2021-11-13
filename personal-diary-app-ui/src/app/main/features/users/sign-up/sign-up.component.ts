@@ -22,7 +22,7 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this._formBuilder.group({
-      name: ['', [Validators.required, Validators.email]],
+      name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
@@ -32,14 +32,18 @@ export class SignUpComponent implements OnInit {
     if (!this.formGroup?.valid) {
       this._toastService.info('Invalid Input')
     } else {
-
       this._usersService.signUp(this.formGroup?.value).subscribe(result => {
-        this._router.navigate(['']);
       }, error => {
-        this._toastService.error('Something wrong.')
+        if(error.status === 200)
+        {
+          this._toastService.success('Account create successfully.')
+          this._router.navigate(['']);
+        }else{
+          this._toastService.error('Account exist via this mail.')
+        }
+
       })
     }
-    console.log(this.formGroup?.value)
   }
 
 }

@@ -12,6 +12,7 @@ const routes: Routes = [
   {
     path: 'home', component: HomeComponent, children: [
       {path: 'add-new-diary', component: NewDiaryComponent},
+      {path: 'update-diaries/:uuid', component: NewDiaryComponent},
       {path: 'diaries', component: DiariesListComponent},
       {path: 'categories', component: CategoriesComponent},
     ]

@@ -16,19 +16,14 @@ export class CategoryService {
   }
 
   getCategoriesList(): Observable<any> {
-    const json = [{
-      id: 1,
-      categoryName: 'string',
-      description: 'string'
-    }]
-    return of(json);
+    return this.http.get(this.personalDiaryBackendHost+'api/categories');
   }
 
-  deleteCategoryById() : Observable<any>{
-    return of(EMPTY);
+  deleteCategoryById(id: any) : Observable<any>{
+    return this.http.delete(this.personalDiaryBackendHost+'api/categories/'+id);
   }
 
   saveCategory(value: any): Observable<any> {
-    return of(EMPTY);
+    return this.http.post(this.personalDiaryBackendHost+'api/categories',value);
   }
 }

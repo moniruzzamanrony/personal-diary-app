@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/internal/Observable';
 import {environment} from "../../../../../environments/environment";
-import {EMPTY, of} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +12,29 @@ export class DailyNoteService {
 
   private personalDiaryBackendHost = environment.personalDiaryBackendHost;
 
+  dailyNote: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
   constructor(private http: HttpClient) {
   }
 
 
-  deleteDiaryNoteById() : Observable<any>{
-    return of(EMPTY);
+  deleteDiaryNoteById(id: any): Observable<any> {
+    return this.http.delete(this.personalDiaryBackendHost + 'api/dairies/' + id);
   }
 
-  saveCategory(value: any): Observable<any> {
-    return of(EMPTY);
+  saveDairy(value: any): Observable<any> {
+    return this.http.post(this.personalDiaryBackendHost + 'api/dairies', value);
   }
 
-  getDiariesList():  Observable<any>{
-    const json = [{
-      id: 1,
-      title: 'string',
-      dailyNote: 'string',
-      dateTime: '12/12/12 12:00'
-    }]
-    return of(json);
+  updateDairyById(dairyId: any,value: any): Observable<any> {
+    return this.http.put(this.personalDiaryBackendHost + 'api/dairies/'+ dairyId, value);
+  }
+
+  getDiariesList(): Observable<any> {
+    return this.http.get(this.personalDiaryBackendHost + 'api/dairies');
+  }
+
+  getDairyByUuid(dairyId: any): Observable<any> {
+    return this.http.get(this.personalDiaryBackendHost + 'api/dairies/'+ dairyId);
   }
 }
