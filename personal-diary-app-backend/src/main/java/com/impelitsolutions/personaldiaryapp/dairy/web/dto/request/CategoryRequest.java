@@ -6,12 +6,10 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class DairyRequest {
+public class CategoryRequest {
 
-    private String title;
+    private String categoryName;
 
-    private String dailyNote;
-
-    private String categoryId;
+    private String description;
 
 }

@@ -5,23 +5,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Daily {
+public class Category {
 
     @Id
     private String id;
-    private String title;
-    private String dailyNote;
-    private LocalDateTime dateTime;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Category category;
-
-
+    private String categoryName;
+    private String description;
 }

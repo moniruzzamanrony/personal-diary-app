@@ -1,7 +1,9 @@
 package com.impelitsolutions.personaldiaryapp.dairy.services;
 
 import com.impelitsolutions.personaldiaryapp.common.exceptions.ResourceNotFoundException;
+import com.impelitsolutions.personaldiaryapp.dairy.model.domain.Category;
 import com.impelitsolutions.personaldiaryapp.dairy.model.domain.Daily;
+import com.impelitsolutions.personaldiaryapp.dairy.model.repositories.CategoryRepository;
 import com.impelitsolutions.personaldiaryapp.dairy.model.repositories.DailyRepository;
 import com.impelitsolutions.personaldiaryapp.dairy.web.dto.request.DairyRequest;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.UUID;
 public class DairyService {
 
     private final DailyRepository dailyRepository;
+    private final CategoryRepository categoryRepository;
 
     public ResponseEntity<?> save(DairyRequest dairyRequest) {
         String uuid = UUID.randomUUID().toString();
@@ -26,30 +29,36 @@ public class DairyService {
         BeanUtils.copyProperties(dairyRequest, daily);
         daily.setId(uuid);
         daily.setDateTime(LocalDateTime.now());
-
+        Optional<Category> categoryOptional = categoryRepository.findById(dairyRequest.getCategoryId());
+        if (!categoryOptional.isPresent()) {
+            throw new ResourceNotFoundException("Category not found");
+        }
+        daily.setCategory(categoryOptional.get());
         return new ResponseEntity(dailyRepository.save(daily), HttpStatus.OK);
     }
 
     public ResponseEntity<?> updateDairy(String uuid, DairyRequest dairyRequest) {
-
         Optional<Daily> dailyOptional = dailyRepository.findById(uuid);
         if (!dailyOptional.isPresent()) {
             throw new ResourceNotFoundException("Daily note not found");
         }
-
         Daily daily = dailyOptional.get();
         BeanUtils.copyProperties(dairyRequest, daily);
+        Optional<Category> categoryOptional = categoryRepository.findById(dairyRequest.getCategoryId());
+        if (!categoryOptional.isPresent()) {
+            throw new ResourceNotFoundException("Category not found");
+        }
+        daily.setCategory(categoryOptional.get());
         daily.setDateTime(LocalDateTime.now());
 
         return new ResponseEntity(dailyRepository.save(daily), HttpStatus.OK);
     }
 
     public ResponseEntity<?> deleteDairy(String uuid) {
-        try{
+        try {
             dailyRepository.deleteById(uuid);
             return new ResponseEntity(true, HttpStatus.OK);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             return new ResponseEntity(false, HttpStatus.NO_CONTENT);
         }
 
