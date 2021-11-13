@@ -26,4 +26,8 @@ export class CategoryService {
   saveCategory(value: any): Observable<any> {
     return this.http.post(this.personalDiaryBackendHost+'api/categories',value);
   }
+
+  updateCategory(uuid:any,value: any) {
+    return this.http.put(this.personalDiaryBackendHost+'api/categories/'+uuid,value);
+  }
 }

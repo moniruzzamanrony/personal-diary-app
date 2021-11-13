@@ -33,7 +33,7 @@ public class CategoryService {
             throw new ResourceNotFoundException("Daily note not found");
         }
         Category category = categoryOptional.get();
-        BeanUtils.copyProperties(categoryRequest, categoryRequest);
+        BeanUtils.copyProperties(categoryRequest, category);
         return new ResponseEntity(categoryRepository.save(category), HttpStatus.OK);
     }
 

@@ -14,7 +14,8 @@ export class CategoriesComponent implements OnInit {
 
   categoryModelList: CategoryModel[] = new Array();
   formGroup: any;
-
+  isEditable: boolean = false;
+  categoryIdForEdit: any = null;
   constructor(private _categoryService: CategoryService,
               public _toastService: ToastService,
               private _authService: AuthService,
@@ -33,7 +34,7 @@ export class CategoriesComponent implements OnInit {
     this.categoryModelList = [];
     this._categoryService.getCategoriesList().subscribe(result => {
       result.body.forEach((category: any) => {
-        if(this._authService.getEmail() === category.createdBy) {
+        if (this._authService.getEmail() === category.createdBy) {
           this.categoryModelList.push({
             id: category.id,
             categoryName: category.categoryName,
@@ -57,12 +58,37 @@ export class CategoriesComponent implements OnInit {
     if (!this.formGroup?.valid) {
       this._toastService.info('Categories name required.')
     } else {
-      this._categoryService.saveCategory(this.formGroup?.value).subscribe(result => {
-        this._toastService.success('Save successfully.');
-        this.getCategoriesList();
-      }, error => {
-        this._toastService.error('Something want wrong.');
-      })
+      if (!this.isEditable) {
+        this._categoryService.saveCategory(this.formGroup?.value).subscribe(result => {
+          this._toastService.success('Save successfully.');
+          this.getCategoriesList();
+        }, error => {
+          this._toastService.error('Something want wrong.');
+        })
+      }else{
+        this._categoryService.updateCategory( this.categoryIdForEdit,this.formGroup?.value).subscribe(result => {
+          this._toastService.success('Update successfully.');
+          this.getCategoriesList();
+        }, error => {
+          this._toastService.error('Something want wrong.');
+        })
+      }
     }
+  }
+
+  editCategoryById(id: any) {
+    const data = this.categoryModelList.filter(res=> res.id === id)[0];
+    this.categoryIdForEdit = data.id;
+    this.formGroup.patchValue(
+      {
+        id: data.id,
+        categoryName: data.categoryName,
+        description: data.description
+      }
+    );
+
+    this.isEditable = true;
+
+    console.log(data)
   }
 }
