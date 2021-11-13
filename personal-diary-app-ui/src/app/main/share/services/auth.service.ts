@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import jwt_decode from 'jwt-decode';
+import {JwtHelperService} from "@auth0/angular-jwt";
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +16,30 @@ export class AuthService {
   }
 
   getId(): any {
-    let token =  this.getAccessToken();
+    let token = this.getAccessToken();
+    console.log(jwt_decode(String(token)))
     return Object(jwt_decode(String(token))).id
   }
 
+  getEmail(): any {
+    let token = this.getAccessToken();
+    console.log(jwt_decode(String(token)))
+    return Object(jwt_decode(String(token))).sub
+  }
+
   getName(): any {
-    let token =  this.getAccessToken();
+    let token = this.getAccessToken();
     return Object(jwt_decode(String(token))).name
 
+  }
+
+
+  isAuthenticated() {
+    if(this.getAccessToken() === '' || this.getAccessToken() == undefined)
+    {
+      return false;
+    }else{
+      return true;
+    }
   }
 }

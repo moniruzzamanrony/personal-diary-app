@@ -4,6 +4,8 @@ import {NewDiaryComponent} from './diary/new-diary/new-diary.component';
 import {HomeComponent} from "./home/home.component";
 import {DiariesListComponent} from "./diary/diaries-list/diaries-list.component";
 import {CategoriesComponent} from "./categories/categories.component";
+import {AuthGuard} from "../../share/auth/auth.guard";
+
 
 const routes: Routes = [
   {
@@ -11,10 +13,10 @@ const routes: Routes = [
   },
   {
     path: 'home', component: HomeComponent, children: [
-      {path: 'add-new-diary', component: NewDiaryComponent},
-      {path: 'update-diaries/:uuid', component: NewDiaryComponent},
-      {path: 'diaries', component: DiariesListComponent},
-      {path: 'categories', component: CategoriesComponent},
+      {path: 'add-new-diary', component: NewDiaryComponent, canActivate: [AuthGuard]},
+      {path: 'update-diaries/:uuid', component: NewDiaryComponent, canActivate: [AuthGuard]},
+      {path: 'diaries', component: DiariesListComponent, canActivate: [AuthGuard]},
+      {path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard]},
     ]
   }
 ];

@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
     if (!this.formGroup?.valid) {
       this._toastService.info('Invalid Input')
     } else {
-
       this._usersService.login(this.formGroup?.value).subscribe(result => {
         localStorage.setItem("token", result.token)
         this._router.navigate(['/home']);

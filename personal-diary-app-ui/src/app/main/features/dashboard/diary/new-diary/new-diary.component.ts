@@ -5,6 +5,7 @@ import {DailyNoteService} from "../../services/daily-note.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CategoryService} from "../../services/category.service";
 import {CategoryModel} from "../../models/category.model";
+import {AuthService} from "../../../../share/services/auth.service";
 
 @Component({
   selector: 'app-new-diary',
@@ -23,6 +24,7 @@ export class NewDiaryComponent implements OnInit {
               public _toastService: ToastService,
               private _formBuilder: FormBuilder,
               private _router: Router,
+              private _authService: AuthService,
               private _activatedRoute: ActivatedRoute) {
     this.dairyId= this._activatedRoute.snapshot.params['uuid'];
     this.getCategoriesList();
@@ -46,12 +48,15 @@ export class NewDiaryComponent implements OnInit {
     this.categoryModelList = [];
     this._categoryService.getCategoriesList().subscribe(result => {
       result.body.forEach((category: any) => {
-        this.categoryModelList.push({
-          id: category.id,
-          categoryName: category.categoryName,
-          description: category.description
-        })
+        if(this._authService.getEmail() === category.createdBy) {
+          this.categoryModelList.push({
+            id: category.id,
+            categoryName: category.categoryName,
+            description: category.description
+          })
+        }
       })
+
     })
   }
 

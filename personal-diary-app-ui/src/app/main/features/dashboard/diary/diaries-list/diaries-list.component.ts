@@ -3,6 +3,7 @@ import {DailyNoteService} from "../../services/daily-note.service";
 import {DiaryModel} from "../../models/diary.model";
 import {ToastService} from "../../../../share/services/toast.service";
 import {Router} from "@angular/router";
+import {AuthService} from "../../../../share/services/auth.service";
 
 @Component({
   selector: 'app-diaries-list',
@@ -15,6 +16,7 @@ export class DiariesListComponent implements OnInit {
 
   constructor(private _dailyNoteService: DailyNoteService,
               private _toastService: ToastService,
+              private _authService: AuthService,
               private _router: Router) {
   }
 
@@ -26,6 +28,7 @@ export class DiariesListComponent implements OnInit {
     this.diaryModelModelList= [];
     this._dailyNoteService.getDiariesList().subscribe(diaries => {
       diaries.body.forEach((diary: any) => {
+        if(this._authService.getEmail() === diary.createdBy){
         this.diaryModelModelList.push({
           id: diary.id,
           category: diary.category,
@@ -33,8 +36,10 @@ export class DiariesListComponent implements OnInit {
           dailyNote: diary.dailyNote,
           dateTime: diary.dateTime
         })
+        }
       })
-
+      console.log(diaries.body)
+      console.log(this._authService.getEmail())
     })
   }
 

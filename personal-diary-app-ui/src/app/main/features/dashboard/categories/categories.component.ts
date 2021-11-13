@@ -3,6 +3,7 @@ import {CategoryModel} from "../models/category.model";
 import {CategoryService} from "../services/category.service";
 import {ToastService} from "../../../share/services/toast.service";
 import {FormBuilder, Validators} from "@angular/forms";
+import {AuthService} from "../../../share/services/auth.service";
 
 @Component({
   selector: 'app-categories',
@@ -16,6 +17,7 @@ export class CategoriesComponent implements OnInit {
 
   constructor(private _categoryService: CategoryService,
               public _toastService: ToastService,
+              private _authService: AuthService,
               private _formBuilder: FormBuilder) {
   }
 
@@ -31,11 +33,13 @@ export class CategoriesComponent implements OnInit {
     this.categoryModelList = [];
     this._categoryService.getCategoriesList().subscribe(result => {
       result.body.forEach((category: any) => {
-        this.categoryModelList.push({
-          id: category.id,
-          categoryName: category.categoryName,
-          description: category.description
-        })
+        if(this._authService.getEmail() === category.createdBy) {
+          this.categoryModelList.push({
+            id: category.id,
+            categoryName: category.categoryName,
+            description: category.description
+          })
+        }
       })
     })
   }

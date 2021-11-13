@@ -9,6 +9,7 @@ import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/h
 import { ToastComponentComponent } from './main/share/components/toast-component/toast-component.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {TokenInterceptor} from "./main/share/auth/token.interceptor";
+import {AuthGuard} from "./main/share/auth/auth.guard";
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,7 @@ import {TokenInterceptor} from "./main/share/auth/token.interceptor";
     AppRoutingModule,
     BrowserAnimationsModule, HttpClientModule, NgbModule
   ],
-  providers: [HttpClient,
+  providers: [HttpClient,AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
