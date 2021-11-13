@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class Category extends BaseEntity{
 
     @Id
     private String id;

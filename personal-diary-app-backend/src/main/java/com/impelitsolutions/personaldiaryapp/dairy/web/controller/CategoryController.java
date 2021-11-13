@@ -32,8 +32,8 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{uuid}")
-    public ResponseEntity<?> deleteCategoryByUuid(@PathVariable("uuid") String uuid) {
-        return ResponseEntity.ok(categoryService.deleteCategoryByUuid(uuid));
+    public void deleteCategoryByUuid(@PathVariable("uuid") String uuid) {
+        categoryService.deleteCategoryByUuid(uuid);
     }
 
 }

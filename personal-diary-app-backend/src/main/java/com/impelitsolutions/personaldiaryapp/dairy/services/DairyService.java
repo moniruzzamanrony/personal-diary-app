@@ -54,17 +54,19 @@ public class DairyService {
         return new ResponseEntity(dailyRepository.save(daily), HttpStatus.OK);
     }
 
-    public ResponseEntity<?> deleteDairy(String uuid) {
-        try {
-            dailyRepository.deleteById(uuid);
-            return new ResponseEntity(true, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity(false, HttpStatus.NO_CONTENT);
-        }
-
+    public void deleteDairy(String uuid) {
+       dailyRepository.deleteById(uuid);
     }
 
     public ResponseEntity<?> getDairies() {
         return new ResponseEntity(dailyRepository.findAll(), HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> getDairyByUuid(String uuid) {
+        Optional<Daily> dailyOptional = dailyRepository.findById(uuid);
+        if (!dailyOptional.isPresent()) {
+            throw new ResourceNotFoundException("Daily note not found");
+        }
+        return new ResponseEntity(dailyRepository.save(dailyOptional.get()), HttpStatus.OK);
     }
 }

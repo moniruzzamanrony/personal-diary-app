@@ -18,6 +18,8 @@ public class UserPrinciple implements UserDetails {
 
     private String id;
 
+    private String name;
+
     private String username;
 
     @JsonIgnore
@@ -25,8 +27,9 @@ public class UserPrinciple implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrinciple(String id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrinciple(String id, String username,String name, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
+        this.name = name;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
@@ -40,9 +43,18 @@ public class UserPrinciple implements UserDetails {
         return new UserPrinciple(
                 user.getId(),
                 user.getUsername(),
+                user.getName(),
                 user.getPassword(),
                 authorities
         );
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getId() {

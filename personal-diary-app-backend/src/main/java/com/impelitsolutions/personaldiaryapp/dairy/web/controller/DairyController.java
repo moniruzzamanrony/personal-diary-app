@@ -31,9 +31,14 @@ public class DairyController {
         return ResponseEntity.ok(dairyService.updateDairy(uuid, dairyRequest));
     }
 
+    @GetMapping("/{uuid}")
+    public ResponseEntity<?> getDairyByUuid(@PathVariable("uuid") String uuid) {
+        return ResponseEntity.ok(dairyService.getDairyByUuid(uuid));
+    }
+
     @DeleteMapping("/{uuid}")
-    public ResponseEntity<?> deleteDairy(@PathVariable("uuid") String uuid) {
-        return ResponseEntity.ok(dairyService.deleteDairy(uuid));
+    public void deleteDairy(@PathVariable("uuid") String uuid) {
+         dairyService.deleteDairy(uuid);
     }
 
 }

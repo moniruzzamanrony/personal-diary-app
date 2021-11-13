@@ -13,14 +13,14 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Daily {
+public class Daily extends BaseEntity{
 
     @Id
     private String id;
     private String title;
     private String dailyNote;
     private LocalDateTime dateTime;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private Category category;
 
 

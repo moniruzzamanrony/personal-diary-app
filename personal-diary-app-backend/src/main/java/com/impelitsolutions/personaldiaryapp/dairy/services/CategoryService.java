@@ -37,14 +37,8 @@ public class CategoryService {
         return new ResponseEntity(categoryRepository.save(category), HttpStatus.OK);
     }
 
-    public ResponseEntity<?> deleteCategoryByUuid(String uuid) {
-        try {
-            categoryRepository.deleteById(uuid);
-            return new ResponseEntity(true, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity(false, HttpStatus.NO_CONTENT);
-        }
-
+    public void deleteCategoryByUuid(String uuid) {
+       categoryRepository.deleteById(uuid);
     }
 
     public ResponseEntity<?> getCategories() {
