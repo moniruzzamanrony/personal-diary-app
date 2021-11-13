@@ -5,7 +5,6 @@ import com.impelitsolutions.personaldiaryapp.auth.constants.LoginConstant;
 import com.impelitsolutions.personaldiaryapp.auth.services.SignUpAndSignInService;
 import com.impelitsolutions.personaldiaryapp.auth.web.dto.request.LoginForm;
 import com.impelitsolutions.personaldiaryapp.auth.web.dto.request.SignUpForm;
-import com.impelitsolutions.personaldiaryapp.common.annotations.RestApi;
 import com.impelitsolutions.personaldiaryapp.common.constants.AccessApiConstant;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
