@@ -9,9 +9,7 @@ import lombok.Setter;
 public class DairyRequest {
 
     private String title;
-
     private String diaryNote;
-
     private String categoryId;
 
 }
